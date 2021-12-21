@@ -12,7 +12,7 @@ public class CalcController {
     private Calc calc;
 
     @RequestMapping("/sum")
-    String sum(@RequestParam("a") Integer a, @RequestParam("b") Integer b) {
+    String sum(final @RequestParam("a") Integer a, final @RequestParam("b") Integer b) {
         return String.valueOf(calc.sum(a, b));
     }
 
