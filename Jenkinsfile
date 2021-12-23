@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    triggers {
+        pollSCM('5 * * * *')
+    }
+
     stages {
 
         stage("Compile") {
@@ -35,6 +39,18 @@ pipeline {
                     reportFiles: 'main.html',
                     reportName: "Checkstyle Report"
                 ])
+            }
+        }
+
+        stage("Package") {
+            steps {
+                sh "./gradlew build"
+            }
+        }
+
+        stage("Docker build") {
+            steps {
+                sh "docker build -t calc ."
             }
         }
 
