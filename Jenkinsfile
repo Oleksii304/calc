@@ -48,11 +48,14 @@ pipeline {
             }
         }
 
-        stage("Docker build") {
+        stage("Acceptance test") {
             steps {
-                sh "docker build -t calc ."
+                sleep 60
+                sh "chmod +x acceptance_test.sh && ./acceptance_test.sh"
             }
         }
 
     }
+
+
 }
