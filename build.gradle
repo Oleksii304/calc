@@ -1,7 +1,14 @@
+buildscript {
+	dependencies {
+		classpath 'com.h2database:h2:2.0.206'
+	}
+}
+
 plugins {
 	id 'org.springframework.boot' version '2.6.1'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'org.flywaydb.flyway' version '8.4.3'
 }
 
 apply plugin: "jacoco"
@@ -15,6 +22,11 @@ repositories {
 	mavenCentral()
 }
 
+flyway {
+	url = 'jdbc:h2:file:/tmp/calc'
+	user = 'sa'
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'junit:junit:4.13.1'
@@ -22,6 +34,8 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'io.cucumber:cucumber-java:4.3.1'
 	testImplementation 'io.cucumber:cucumber-junit:4.3.1'
+	implementation 'com.hazelcast:hazelcast-all:3.12'
+
 }
 
 checkstyle {
